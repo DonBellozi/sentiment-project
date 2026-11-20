@@ -1,0 +1,7 @@
+2026-11-15T20:00:36+00:00
+NAME            STATUS   ROLES           AGE   VERSION   INTERNAL-IP    EXTERNAL-IP   OS-IMAGE                         KERNEL-VERSION              CONTAINER-RUNTIME
+sentiment       Ready    control-plane   36m   v1.37.0   192.168.49.2   <none>        Debian GNU/Linux 12 (bookworm)   6.8.0-149-generic (amd64)   containerd://2.3.4
+sentiment-m02   Ready    <none>          36m   v1.37.0   192.168.49.3   <none>        Debian GNU/Linux 12 (bookworm)   6.8.0-149-generic (amd64)   containerd://2.3.4
+No resources found in sentiment namespace.
+No resources found in sentiment namespace.
+No resources found in sentiment namespace.

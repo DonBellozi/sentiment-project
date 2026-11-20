@@ -1,0 +1,24 @@
+2026-11-16T15:37:01+00:00
+NAME                             READY   STATUS    RESTARTS   AGE   IP           NODE            NOMINATED NODE   READINESS GATES
+pod/sentiment-564c89b5ff-5zgwf   1/1     Running   0          19h   10.244.0.6   sentiment       <none>           <none>
+pod/sentiment-564c89b5ff-8pbpw   1/1     Running   0          19h   10.244.1.4   sentiment-m02   <none>           <none>
+pod/sentiment-564c89b5ff-t6zns   1/1     Running   0          19h   10.244.1.3   sentiment-m02   <none>           <none>
+
+NAME                        TYPE           CLUSTER-IP       EXTERNAL-IP      PORT(S)        AGE   SELECTOR
+service/sentiment           LoadBalancer   10.107.117.240   10.107.117.240   80:30410/TCP   19h   app=sentiment
+service/sentiment-metrics   ClusterIP      10.107.210.50    <none>           8081/TCP       19h   app=sentiment
+
+NAME                                  CLASS   HOSTS             ADDRESS        PORTS   AGE
+ingress.networking.k8s.io/sentiment   nginx   sentiment.local   192.168.49.2   80      19h
+
+NAME                                            REFERENCE              TARGETS       MINPODS   MAXPODS   REPLICAS   AGE
+horizontalpodautoscaler.autoscaling/sentiment   Deployment/sentiment   cpu: 3%/60%   3         6         3          19h
+  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+  0     0    0     0    0     0      0      0 --:--:-- --:--:-- --:--:--     0100    80    0    80    0     0  44943      0 --:--:-- --:--:-- --:--:-- 80000
+HTTP/1.1 200 
+Content-Type: application/json
+Transfer-Encoding: chunked
+Date: Mon, 16 Nov 2026 15:37:01 GMT
+
+{"model":"lexicon-v1","pod":"sentiment-564c89b5ff-8pbpw","sentiment":"positive"}

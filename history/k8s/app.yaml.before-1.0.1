@@ -1,0 +1,110 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: sentiment
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: sentiment
+  namespace: sentiment
+spec:
+  replicas: 3
+  selector:
+    matchLabels: {app: sentiment}
+  template:
+    metadata:
+      labels: {app: sentiment}
+    spec:
+      securityContext:
+        runAsNonRoot: true
+        runAsUser: 10001
+        fsGroup: 10001
+      containers:
+        - name: api
+          image: sentiment-api:1.0.0
+          imagePullPolicy: IfNotPresent
+          ports:
+            - {name: http, containerPort: 8080}
+            - {name: management, containerPort: 8081}
+          resources:
+            requests: {cpu: 100m, memory: 192Mi}
+            limits: {cpu: 500m, memory: 384Mi}
+          startupProbe:
+            httpGet: {path: /actuator/health/liveness, port: management}
+            periodSeconds: 5
+            failureThreshold: 30
+          readinessProbe:
+            httpGet: {path: /actuator/health/readiness, port: management}
+            periodSeconds: 5
+          livenessProbe:
+            httpGet: {path: /actuator/health/liveness, port: management}
+            periodSeconds: 10
+          securityContext:
+            allowPrivilegeEscalation: false
+            readOnlyRootFilesystem: true
+            capabilities: {drop: [ALL]}
+          volumeMounts:
+            - {name: tmp, mountPath: /tmp}
+      volumes:
+        - name: tmp
+          emptyDir: {}
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: sentiment
+  namespace: sentiment
+  labels: {app: sentiment}
+spec:
+  type: LoadBalancer
+  selector: {app: sentiment}
+  ports:
+    - {name: http, port: 80, targetPort: http}
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: sentiment-metrics
+  namespace: sentiment
+  labels: {app: sentiment-metrics}
+spec:
+  selector: {app: sentiment}
+  ports:
+    - {name: management, port: 8081, targetPort: management}
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: sentiment
+  namespace: sentiment
+spec:
+  ingressClassName: nginx
+  rules:
+    - host: sentiment.local
+      http:
+        paths:
+          - path: /api
+            pathType: Prefix
+            backend:
+              service:
+                name: sentiment
+                port: {name: http}
+---
+apiVersion: autoscaling/v2
+kind: HorizontalPodAutoscaler
+metadata:
+  name: sentiment
+  namespace: sentiment
+spec:
+  scaleTargetRef: {apiVersion: apps/v1, kind: Deployment, name: sentiment}
+  minReplicas: 3
+  maxReplicas: 6
+  metrics:
+    - type: Resource
+      resource:
+        name: cpu
+        target: {type: Utilization, averageUtilization: 60}
+  behavior:
+    scaleDown:
+      stabilizationWindowSeconds: 120

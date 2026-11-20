@@ -1,0 +1,15 @@
+NAME        REFERENCE              TARGETS       MINPODS   MAXPODS   REPLICAS   AGE
+sentiment   Deployment/sentiment   cpu: 6%/60%   3         6         3          5m46s
+sentiment   Deployment/sentiment   cpu: 209%/60%   3         6         3          6m30s
+sentiment   Deployment/sentiment   cpu: 209%/60%   3         6         6          6m45s
+sentiment   Deployment/sentiment   cpu: 429%/60%   3         6         6          7m30s
+sentiment   Deployment/sentiment   cpu: 363%/60%   3         6         6          8m31s
+sentiment   Deployment/sentiment   cpu: 399%/60%   3         6         6          9m31s
+NAME        REFERENCE              TARGETS         MINPODS   MAXPODS   REPLICAS   AGE
+sentiment   Deployment/sentiment   cpu: 277%/60%   3         6         6          11m
+sentiment   Deployment/sentiment   cpu: 4%/60%     3         6         6          12m
+sentiment   Deployment/sentiment   cpu: 3%/60%     3         6         6          13m
+sentiment   Deployment/sentiment   cpu: 3%/60%     3         6         6          14m
+sentiment   Deployment/sentiment   cpu: 4%/60%     3         6         3          14m
+sentiment   Deployment/sentiment   cpu: 3%/60%     3         6         3          15m
+sentiment   Deployment/sentiment   cpu: 4%/60%     3         6         3          19m

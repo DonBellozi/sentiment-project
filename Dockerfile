@@ -1,0 +1,14 @@
+FROM maven:3.9.11-eclipse-temurin-17-alpine AS build
+WORKDIR /build
+COPY pom.xml .
+COPY src src
+RUN mvn -B verify
+RUN jlink --add-modules java.base,java.logging,java.management,jdk.management,java.naming,java.net.http,java.security.jgss,java.instrument,java.sql,java.desktop,jdk.crypto.ec,jdk.unsupported \
+    --strip-debug --no-header-files --no-man-pages --compress=2 --output /runtime
+FROM alpine:3.22
+RUN apk add --no-cache libstdc++ zlib ca-certificates && addgroup -S app && adduser -S -G app -u 10001 app
+COPY --from=build /runtime /opt/java
+COPY --from=build --chown=10001:10001 /build/target/sentiment-api-1.0.0.jar /app/app.jar
+USER 10001:10001
+EXPOSE 8080 8081
+ENTRYPOINT ["/opt/java/bin/java","-XX:MaxRAMPercentage=65","-jar","/app/app.jar"]

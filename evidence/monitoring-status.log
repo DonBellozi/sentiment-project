@@ -1,0 +1,22 @@
+NAME                                                       READY   STATUS    RESTARTS   AGE
+pod/prometheus-grafana-795fc486b9-xbpx6                    3/3     Running   0          79s
+pod/prometheus-kube-prometheus-operator-5986df5656-gvcct   1/1     Running   0          3m7s
+pod/prometheus-kube-state-metrics-cb5d78584-qtqzz          1/1     Running   0          3m7s
+pod/prometheus-prometheus-kube-prometheus-prometheus-0     2/2     Running   0          2m53s
+pod/prometheus-prometheus-node-exporter-5j7lr              1/1     Running   0          3m7s
+pod/prometheus-prometheus-node-exporter-xd7wd              1/1     Running   0          3m7s
+
+NAME                                                                                      AGE
+servicemonitor.monitoring.coreos.com/prometheus-grafana                                   3m5s
+servicemonitor.monitoring.coreos.com/prometheus-kube-prometheus-apiserver                 3m5s
+servicemonitor.monitoring.coreos.com/prometheus-kube-prometheus-coredns                   3m5s
+servicemonitor.monitoring.coreos.com/prometheus-kube-prometheus-kube-controller-manager   3m5s
+servicemonitor.monitoring.coreos.com/prometheus-kube-prometheus-kube-etcd                 3m5s
+servicemonitor.monitoring.coreos.com/prometheus-kube-prometheus-kube-proxy                3m5s
+servicemonitor.monitoring.coreos.com/prometheus-kube-prometheus-kube-scheduler            3m5s
+servicemonitor.monitoring.coreos.com/prometheus-kube-prometheus-kubelet                   3m5s
+servicemonitor.monitoring.coreos.com/prometheus-kube-prometheus-operator                  3m5s
+servicemonitor.monitoring.coreos.com/prometheus-kube-prometheus-prometheus                3m5s
+servicemonitor.monitoring.coreos.com/prometheus-kube-state-metrics                        3m5s
+servicemonitor.monitoring.coreos.com/prometheus-prometheus-node-exporter                  3m5s
+servicemonitor.monitoring.coreos.com/sentiment                                            7s

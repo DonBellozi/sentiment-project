@@ -1,0 +1,6 @@
+=== text=hello ===
+{"model":"lexicon-v1","sentiment":"positive","pod":"02621eacbd89"}
+=== text=bad ===
+{"model":"lexicon-v1","sentiment":"negative","pod":"02621eacbd89"}
+=== text=unknown ===
+{"model":"lexicon-v1","sentiment":"neutral","pod":"02621eacbd89"}

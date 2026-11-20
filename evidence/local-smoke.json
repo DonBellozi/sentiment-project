@@ -1,0 +1,27 @@
+[
+  {
+    "url": "http://127.0.0.1:18080/api/sentiment?text=hello",
+    "status": 200,
+    "body": "{\"model\":\"lexicon-v1\",\"sentiment\":\"positive\",\"pod\":\"local\"}"
+  },
+  {
+    "url": "http://127.0.0.1:18080/api/sentiment?text=bad",
+    "status": 200,
+    "body": "{\"model\":\"lexicon-v1\",\"sentiment\":\"negative\",\"pod\":\"local\"}"
+  },
+  {
+    "url": "http://127.0.0.1:18080/api/sentiment?text=unknown",
+    "status": 200,
+    "body": "{\"model\":\"lexicon-v1\",\"sentiment\":\"neutral\",\"pod\":\"local\"}"
+  },
+  {
+    "url": "http://127.0.0.1:18081/actuator/health",
+    "status": 200,
+    "body": "{\"status\":\"UP\",\"groups\":[\"liveness\",\"readiness\"]}"
+  },
+  {
+    "url": "http://127.0.0.1:18081/actuator/prometheus",
+    "status": 200,
+    "body": "sentiment_predictions_total{sentiment=\"negative\"} 1.0\nsentiment_predictions_total{sentiment=\"neutral\"} 1.0\nsentiment_predictions_total{sentiment=\"positive\"} 1.0"
+  }
+]
